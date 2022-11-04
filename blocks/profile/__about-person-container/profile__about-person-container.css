@@ -8,6 +8,6 @@
 @media all and (max-width: 544px) {
   .profile__about-person-container {
     flex-direction: column;
-    gap: 26px 0 ;
+    gap: 26px 0;
   }
 }
