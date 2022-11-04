@@ -1,0 +1,10 @@
+.profile__add-button_wide {
+   display: none;
+}
+
+@media all and (max-width: 767px) {
+    .profile__add-button_wide {
+      display: block;
+      width: 100%;
+  }
+}

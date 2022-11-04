@@ -1,0 +1,16 @@
+.profile__name {
+  margin: 0;
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  grid-area: profile__name;
+  white-space: nowrap;
+}
+
+@media all and (max-width: 544px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+    padding-left: 25px;
+  }
+}

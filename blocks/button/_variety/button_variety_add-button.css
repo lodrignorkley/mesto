@@ -1,0 +1,14 @@
+.button_variety_add-button {
+  display: block;
+  background-image: url('../../../images/add-small-button.svg');
+  width: 150px;
+  height: 50px;
+}
+
+@media all and (max-width: 767px) {
+  .button_variety_add-button {
+    background-image: url('../../../images/add-big-button.svg');
+    width: 282px;
+    height: 50px;
+  }
+}
