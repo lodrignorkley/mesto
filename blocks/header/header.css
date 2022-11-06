@@ -1,16 +1,32 @@
 .header {
   max-width: 880px;
   margin: 0 auto;
-  border-bottom: 1px solid rgba(54, 54, 54, .7);
+  
   padding-top: 45px;
   padding-bottom: 41px;
   padding-left: 27px;
   padding-right: 27px;
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 27px;
+  bottom: 0;
+  height: 1px;
+  width: calc(100% - 54px);
+  background-color: rgba(84, 84, 84, .7);
 }
 
 @media all and (max-width: 544px) {
   .header {
     padding-bottom: 31.6px;
     padding-top: 28px;
+  }
+  .header::after {
+    left: 0;
+    width: 100%;
   }
 }
