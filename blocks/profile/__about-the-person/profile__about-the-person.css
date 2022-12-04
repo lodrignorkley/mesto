@@ -1,0 +1,20 @@
+.profile__about-the-person {
+  box-sizing: border-box;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 100%;
+  gap: 7px 18px;
+  grid-template-areas: 
+    "profile__name button_variety_edit-button"
+    "profile__occupation profile__occupation";
+}
+
+@media all and (max-width: 544px) {
+  .profile__about-the-person {
+    text-align: center;
+    gap: 8px 10px;
+  }
+}

@@ -1,0 +1,11 @@
+.popup__image-container {
+    box-sizing: border-box;
+    max-width: 75vw;
+    max-height: 75vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
