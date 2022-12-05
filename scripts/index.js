@@ -17,6 +17,7 @@ const inputImageSource = page.querySelector('.popup__input_type_href');
 const enlargedImagePopUp = page.querySelector('.popup-enlarged-image');
 const enlargedImage = page.querySelector('.popup__image');
 const enlargedImageTitle = page.querySelector('.popup__figcaption');
+const cardTemplate = document.querySelector('#places__card-template').content;
 const initialCards = [
   {
     name: 'Архыз',
@@ -52,12 +53,6 @@ function resetForm(targetPopUp) {
   targetPopUp.reset();
 };
 
-closeButtons.forEach(closeButton => {
-  closeButton.addEventListener('click', function(event) {
-    event.target.closest('.popup').classList.remove('popup_opened');
-  })
-});
-
 function pullInformation() {
   inputProfileName.value = profileName.textContent;
   inputProfileOccupation.value = profileOccupation.textContent;
@@ -77,6 +72,13 @@ function openPopUp(targetPopUp) {
 function closePopUp(targetPopUp) {
   targetPopUp.classList.remove('popup_opened');
 }
+
+closeButtons.forEach(closeButton => {
+  const popUp = closeButton.closest('.popup');
+  closeButton.addEventListener('click', () => {
+    closePopUp(popUp);
+  })
+});
 
 editButton.addEventListener('click', function () {
   openPopUp(editProfilePopUp);
@@ -117,7 +119,6 @@ function addNewCard(cardContainer, cardToAdd) {
 };
 
 function createCard(title, imageSource) {
-  const cardTemplate = document.querySelector('#places__card-template').content;
   const cardClone = cardTemplate.querySelector('.places__card').cloneNode(true);
   const cardCloneImage = cardClone.querySelector('.places__image');
   const cardCloneTitle = cardClone.querySelector('.places__title');
@@ -135,6 +136,7 @@ function createCard(title, imageSource) {
   function enlargeImage() {
     openPopUp(enlargedImagePopUp);
     enlargedImage.src = cardCloneImage.src;
+    enlargedImage.alt = cardCloneTitle.textContent;
     enlargedImageTitle.textContent = cardCloneTitle.textContent;
   };
 
