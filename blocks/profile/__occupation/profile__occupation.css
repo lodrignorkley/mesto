@@ -1,0 +1,18 @@
+.profile__occupation {
+  margin: 0;
+  font-size: 18px;
+  line-height: 22px;
+  grid-area: profile__occupation;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
+}
+
+@media all and (max-width: 544px) {
+  .profile__occupation {
+    font-size: 14px;
+    line-height: 17px;
+    max-width: 282px;
+  }  
+}
