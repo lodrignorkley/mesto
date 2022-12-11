@@ -1,20 +1,44 @@
-  function showErrorMessage(Object, formElement, inputElement, errorMessage) {
+function disableSubmitButton(formReference) {
+  const submissionButtons = page.querySelectorAll(`.${formReference['submissionButton']}`);
+  submissionButtons.forEach(submissionButton => {
+    if(submissionButton.closest('.popup').classList.contains('popup_opened')) 
+    {
+      submissionButton.classList.add('popup__submit-button_variety_deactivated');
+      submissionButton.setAttribute('disabled', 'true');
+    };
+  })
+};
+
+
+function removeValidationErrors(targetPopUp, validationConfig) {
+  const inputs = targetPopUp.querySelectorAll(`.${validationConfig['input']}`);
+  const errorMessages = targetPopUp.querySelectorAll(`.${validationConfig['failedInputMessage']}`);
+  inputs.forEach(input => {
+    input.classList.remove(`.${validationConfig['failedInput']}`);
+  });
+  errorMessages.forEach(errorMessage => {
+    errorMessage.textContent = '';
+  })
+};
+  
+  
+  function showErrorMessage(validationConfig, formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(`.${Object['failedInput']}`);
+    inputElement.classList.add(`.${validationConfig['failedInput']}`);
     errorElement.textContent = errorMessage;
   };
   
-  function hideErrorMessage(formElement, inputElement) {
+  function hideErrorMessage(validationConfig, formElement, inputElement) {
    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-   inputElement.classList.remove(`.${Object['failedInput']}`);
+   inputElement.classList.remove(`.${validationConfig['failedInput']}`);
    errorElement.textContent = '';
   };
   
-  function checkInputInvalidity(Object, formElement, inputElement) {
+  function checkInputInvalidity(validationConfig, formElement, inputElement) {
     if(!inputElement.validity.valid) {
-      showErrorMessage(Object, formElement, inputElement, inputElement.validationMessage);
+      showErrorMessage(validationConfig, formElement, inputElement, inputElement.validationMessage);
     } else {
-        hideErrorMessage(formElement, inputElement);
+        hideErrorMessage(validationConfig, formElement, inputElement);
      }
   };
   
@@ -24,32 +48,32 @@
     });
   };
   
-  function toggleSubmissionButton(Object, inputList, submissionButton) {
+  function toggleSubmissionButton(validationConfig, inputList, submissionButton) {
     if(checkFormInvalidity(inputList)) {
-      submissionButton.classList.add(`${Object['deactivatedSubmissionButton']}`);
+      submissionButton.classList.add(`${validationConfig['deactivatedSubmissionButton']}`);
       submissionButton.setAttribute('disabled', 'true');
     } else {
-        submissionButton.classList.remove(`${Object['deactivatedSubmissionButton']}`);
+        submissionButton.classList.remove(`${validationConfig['deactivatedSubmissionButton']}`);
         submissionButton.removeAttribute('disabled');
       };
   };
   
-  function setEventListeners(Object, formElement) {
-    const inputList = Array.from(formElement.querySelectorAll(`.${Object['input']}`));
-    const submissionButton = formElement.querySelector(`.${Object['submissionButton']}`);
-    toggleSubmissionButton(Object, inputList, submissionButton);
+  function setEventListeners(validationConfig, formElement) {
+    const inputList = Array.from(formElement.querySelectorAll(`.${validationConfig['input']}`));
+    const submissionButton = formElement.querySelector(`.${validationConfig['submissionButton']}`);
+    toggleSubmissionButton(validationConfig, inputList, submissionButton);
     inputList.forEach(inputElement => {
       inputElement.addEventListener('input', function() {
-        checkInputInvalidity(Object, formElement, inputElement)
-        toggleSubmissionButton(Object, inputList, submissionButton);
+        checkInputInvalidity(validationConfig, formElement, inputElement)
+        toggleSubmissionButton(validationConfig, inputList, submissionButton);
       });
     });
   };
   
-  function enableValidation(Object) {
-    const formList = Array.from(page.querySelectorAll(`.${Object['form']}`));
+  function enableValidation(validationConfig) {
+    const formList = Array.from(page.querySelectorAll(`.${validationConfig['form']}`));
     formList.forEach((formElement) => { 
-      setEventListeners(Object, formElement);
+      setEventListeners(validationConfig, formElement);
     });
   };
   
