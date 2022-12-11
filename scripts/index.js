@@ -44,13 +44,46 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ]; 
+const formReference = {
+  form: 'popup__form',
+  input: 'popup__input',
+  failedInput: 'popup__input_type_error',
+  submissionButton: 'popup__submit-button',
+  deactivatedSubmissionButton: 'popup__submit-button_variety_deactivated'
+};
 
 function preventEvtDefaultBehavior(event) {
   event.preventDefault();
 }
 
-function resetForm(targetPopUp) {
-  targetPopUp.reset();
+function resetForm(targetForm) {
+  targetForm.reset();
+};
+
+function renderSubmissionButtonDeactivated() {
+  const submissionButtons = page.querySelectorAll('.popup__submit-button');
+  submissionButtons.forEach(submissionButton => {
+    submissionButton.classList.add('popup__submit-button_variety_deactivated');
+    submissionButton.setAttribute('disabled', 'true');
+  })
+};
+
+function renderErrorMessagesIrrelevant(targetPopUp) {
+  const inputs = targetPopUp.querySelectorAll('.popup__input');
+  const errorMessages = targetPopUp.querySelectorAll('.popup__error-message');
+  inputs.forEach(input => {
+    input.classList.remove('popup__input_type_error');
+  });
+  errorMessages.forEach(errorMessage => {
+    errorMessage.textContent = '';
+  })
+};
+
+function closeUsingEscape(event) {
+  const openedPopUp = document.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    closePopUp(openedPopUp);
+  }
 };
 
 function pullInformation() {
@@ -67,10 +100,13 @@ function updateInformation() {
 
 function openPopUp(targetPopUp) {
   targetPopUp.classList.add('popup_opened');
+  document.addEventListener('keydown', closeUsingEscape);
 };
 
 function closePopUp(targetPopUp) {
   targetPopUp.classList.remove('popup_opened');
+  renderSubmissionButtonDeactivated();
+  document.removeEventListener('keydown', closeUsingEscape);
 }
 
 closeButtons.forEach(closeButton => {
@@ -80,13 +116,22 @@ closeButtons.forEach(closeButton => {
   })
 });
 
+document.addEventListener('click', function(event) {
+  if(event.target.classList.contains('popup') && event.target.classList.contains('popup_opened')) {
+    event.target.classList.remove('popup_opened');
+  }
+});
+
 editButton.addEventListener('click', function () {
   openPopUp(editProfilePopUp);
   pullInformation();
+  renderErrorMessagesIrrelevant(editProfilePopUp);
 });
 
 addButton.addEventListener('click', function () {
   openPopUp(addNewPlacePopUp);
+  resetForm(addNewPlacePopUpForm);
+  renderErrorMessagesIrrelevant(addNewPlacePopUp);
 });
 
 editProfilePopUpForm.addEventListener('submit', function() {
@@ -101,7 +146,7 @@ function createCardFromPopUp() {
 addNewPlacePopUpForm.addEventListener('submit', function() {
   preventEvtDefaultBehavior(event);
   createCardFromPopUp();
-  addNewPlacePopUpForm.reset();
+  resetForm(addNewPlacePopUpForm);
   closePopUp(addNewPlacePopUp);
 });
 
@@ -148,6 +193,3 @@ function createCard(title, imageSource) {
 initialCards.forEach(element => {
   addNewCard(placesSection, createCard(element.name, element.link))
 });
-
-
-

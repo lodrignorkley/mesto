@@ -31,8 +31,14 @@
           <form class="popup__form" action="#" method="POST" name="profile">
             <h2 class="popup__title">Редактировать профиль</h2>
             <div class="popup__inputs">
-              <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Ваше имя" required>
-              <input class="popup__input popup__input_type_occupation" type="text" name="occupation" placeholder="Ваша профессия" required>
+              <div class="popup__input-container">
+                <input id="popup__input_type_name" class="popup__input popup__input_type_name" type="text" name="name" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+                <span class="popup__error-message popup__input_type_name-error"></span>
+              </div>
+              <div class="popup__input-container">
+                <input id="popup__input_type_occupation" class="popup__input popup__input_type_occupation" type="text" name="occupation" placeholder="Ваша профессия" minlength="2" maxlength="200" required>
+                <span class="popup__error-message popup__input_type_occupation-error"></span>
+              </div>
             </div>
             <button class="popup__submit-button" type="submit">Сохранить</button>
           </form>
@@ -44,8 +50,14 @@
           <form class="popup__form" action="#" method="POST" name="new-card">
             <h2 class="popup__title">Новое место</h2>
             <div class="popup__inputs">
-              <input class="popup__input popup__input_type_destination" type="text" name="destination" placeholder="Название места" required>
-              <input class="popup__input popup__input_type_href" type="text" name="href" placeholder="Ссылка на изображение" required>
+              <div class="popup__input-container">
+                <input id="popup__input_type_destination" class="popup__input popup__input_type_destination" type="text" name="destination" placeholder="Название места" minlength="2" maxlength="30" required>
+                <span class="popup__error-message popup__input_type_destination-error"></span>
+              </div>
+              <div class="popup__input-container">
+                <input id="popup__input_type_href" class="popup__input popup__input_type_href" type="url" name="href" placeholder="Ссылка на изображение" required>
+                <span class="popup__error-message popup__input_type_href-error"></span>
+              </div>
             </div>
             <button class="popup__submit-button" type="submit">Создать</button>
           </form>
@@ -78,5 +90,6 @@
         </div>
       </template>
       <script src="./scripts/index.js"></script>
+      <script src="./scripts/validate.js"></script>
     </body>
   </html>
