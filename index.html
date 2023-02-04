@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+  <html lang="ru">
+    <head>
+      <meta name="author" content="Никита Громов">
+      <meta charset="UTF-8">
+      <meta name="description" content="Сайт, посвященный интересным местам в России">
+      <meta name="keywords" content="Россия, интересные места, интересное место, Карачаевск, Камчатка, Пермский Край, Шантарские острова, Домбай, Эльбрус">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="./pages/index.css" rel="stylesheet">
+      <title>Веб-приложение Mesto</title>
+    </head>
+    <body class="page">
+      <header class="header">
+        <img class="header__logo" src="./images/logo.svg" alt="Логотип веб-сайта">
+      </header>
+      <main class="content">
+      <section class="profile">
+        <div class="profile__about-person-container">
+          <img class="profile__avatar" src="./images/avatar-cropped.png" alt="Аватарка">
+          <div class="profile__about-the-person">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="button button_variety_edit-button" type="button"></button>
+            <p class="profile__occupation">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="button button_variety_add-button" type="button"></button>
+      </section>
+      <section class="places"></section>
+      <section class="popup popup-edit-profile">
+        <div class="popup__container">
+          <form class="popup__form form_variety_profile" action="#" method="POST" name="profile">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <div class="popup__inputs">
+              <div class="popup__input-container">
+                <input id="popup__input-name" class="popup__input popup__input_type_name" type="text" name="name" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+                <span class="popup__error-message popup__input-name-error"></span>
+              </div>
+              <div class="popup__input-container">
+                <input id="popup__input-occupation" class="popup__input popup__input_type_occupation" type="text" name="occupation" placeholder="Ваша профессия" minlength="2" maxlength="200" required>
+                <span class="popup__error-message popup__input-occupation-error"></span>
+              </div>
+            </div>
+            <button class="popup__submit-button" type="submit">Сохранить</button>
+          </form>
+          <button class="button button_variety_close-button" type="button"></button>
+        </div>
+      </section>
+      <section class="popup popup_add-new-place-card">
+        <div class="popup__container">
+          <form class="popup__form form_variety_place" action="#" method="POST" name="new-card">
+            <h2 class="popup__title">Новое место</h2>
+            <div class="popup__inputs">
+              <div class="popup__input-container">
+                <input id="popup__input-destination" class="popup__input popup__input_type_destination" type="text" name="destination" placeholder="Название места" minlength="2" maxlength="30" required>
+                <span class="popup__error-message popup__input-destination-error"></span>
+              </div>
+              <div class="popup__input-container">
+                <input id="popup__input-href" class="popup__input popup__input_type_href" type="url" name="href" placeholder="Ссылка на изображение" required>
+                <span class="popup__error-message popup__input-href-error"></span>
+              </div>
+            </div>
+            <button class="popup__submit-button" type="submit">Создать</button>
+          </form>
+          <button class="button button_variety_close-button" type="button"></button>
+        </div>
+      </section>
+      <section class="popup popup-enlarged-image">
+        <div class="popup__image-container">
+          <figure class="popup__figure">
+            <img class="popup__image">
+            <figcaption class="popup__figcaption"></figcaption>
+          </figure>
+          <button class="button button_variety_close-button" type="button"></button>
+        </div>
+      </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
+      </footer>
+      <template id="places__card-template">
+        <div class="places__card">
+          <button class="button button_variety_delete-button" type="button"></button>
+          <div class="places__image-container">
+            <img class="places__image">
+          </div>
+          <div class="places__caption-container">
+            <h2 class="places__title"></h2>
+            <button class="button button_variety_like-button" type="button"></button>
+          </div>  
+        </div>
+      </template>
+      <script type="module" src="./scripts/index.js"></script>
+    </body>
+  </html>
