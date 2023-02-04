@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+=======
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
 const page = document.querySelector('.page');
 const popUp = page.querySelector('.popup');
 const profileName = page.querySelector('.profile__name');
@@ -16,9 +19,16 @@ const addNewPlacePopUp = page.querySelector('.popup_add-new-place-card');
 const addNewPlacePopUpForm = page.querySelector('form[name="new-card"]');
 const inputDestination = page.querySelector('.popup__input_type_destination');
 const inputImageSource = page.querySelector('.popup__input_type_href');
+<<<<<<< HEAD
 export const enlargedImagePopUp = page.querySelector('.popup-enlarged-image');
 export const enlargedImage = page.querySelector('.popup__image');
 export const enlargedImageTitle = page.querySelector('.popup__figcaption');
+=======
+const enlargedImagePopUp = page.querySelector('.popup-enlarged-image');
+const enlargedImage = page.querySelector('.popup__image');
+const enlargedImageTitle = page.querySelector('.popup__figcaption');
+const cardTemplate = document.querySelector('#places__card-template').content;
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
 const initialCards = [
   {
     name: 'Архыз',
@@ -46,6 +56,7 @@ const initialCards = [
   }
 ]; 
 const formReference = {
+<<<<<<< HEAD
   form: '.popup__form',
   input: '.popup__input',
   failedInput: '.popup__input_type_error',
@@ -61,6 +72,16 @@ const newPlaceFormValidator = new FormValidator(formReference, '.form_variety_pl
 newPlaceFormValidator.enableValidation();
 
 
+=======
+  form: 'popup__form',
+  input: 'popup__input',
+  failedInput: 'popup__input_type_error',
+  submissionButton: 'popup__submit-button',
+  deactivatedSubmissionButton: 'popup__submit-button_variety_deactivated',
+  failedInputMessage: 'popup__error-message'
+};
+
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
 function preventEvtDefaultBehavior(event) {
   event.preventDefault();
 }
@@ -94,7 +115,11 @@ function updateUserInfo() {
   closePopUp(editProfilePopUp);
 }
 
+<<<<<<< HEAD
 export function openPopUp(targetPopUp) {
+=======
+function openPopUp(targetPopUp) {
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
   targetPopUp.classList.add('popup_opened');
   document.addEventListener('keydown', closeUsingEscape);
   document.addEventListener('click', closePopUpFromOutside);
@@ -113,6 +138,7 @@ closeButtons.forEach(closeButton => {
   })
 });
 
+<<<<<<< HEAD
 editButton.addEventListener('click', () => {
   openPopUp(editProfilePopUp);
   profileFormValidator.removeValidationErrors();
@@ -125,6 +151,20 @@ addButton.addEventListener('click', () => {
   newPlaceFormValidator.removeValidationErrors();
   newPlaceFormValidator.disableSubmitButton();
   resetForm(addNewPlacePopUpForm);
+=======
+editButton.addEventListener('click', function () {
+  openPopUp(editProfilePopUp);
+  pullInformation();
+  removeValidationErrors(editProfilePopUp, formReference);
+  disableSubmitButton(formReference);
+});
+
+addButton.addEventListener('click', function () {
+  openPopUp(addNewPlacePopUp);
+  resetForm(addNewPlacePopUpForm);
+  removeValidationErrors(addNewPlacePopUp, formReference);
+  disableSubmitButton(formReference);
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
 });
 
 editProfilePopUpForm.addEventListener('submit', function() {
@@ -132,6 +172,7 @@ editProfilePopUpForm.addEventListener('submit', function() {
 });
 
 
+<<<<<<< HEAD
 initialCards.forEach(element => {
   addNewCard(placesSection, element, '#places__card-template');
 });
@@ -149,11 +190,65 @@ function formNewCardFromPopUp(name, link) {
 function addNewCard(cardContainer, element, templateSelector) {
   const card = new Card(element.name, element.link, templateSelector);
   cardContainer.prepend(card.generateCard());
+=======
+function createCardFromPopUp() {
+  addNewCard(placesSection, createCard(inputDestination.value, inputImageSource.value));
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
 };
 
 addNewPlacePopUpForm.addEventListener('submit', function() {
   preventEvtDefaultBehavior(event);
+<<<<<<< HEAD
   addNewCard(placesSection, formNewCardFromPopUp(inputDestination.value, inputImageSource.value), '#places__card-template');
   resetForm(addNewPlacePopUpForm);
   closePopUp(addNewPlacePopUp);
+=======
+  createCardFromPopUp();
+  resetForm(addNewPlacePopUpForm);
+  closePopUp(addNewPlacePopUp);
+});
+
+
+function deleteCard(event) {
+  event.target.closest('.places__card').remove();
+};
+
+function toggleCardLike(event) {
+  event.target.classList.toggle('button_variety_like-button-active');
+}
+
+function addNewCard(cardContainer, cardToAdd) {
+  cardContainer.prepend(cardToAdd);
+};
+
+function createCard(title, imageSource) {
+  const cardClone = cardTemplate.querySelector('.places__card').cloneNode(true);
+  const cardCloneImage = cardClone.querySelector('.places__image');
+  const cardCloneTitle = cardClone.querySelector('.places__title');
+  const cardDeleteButton = cardClone.querySelector('.button_variety_delete-button');
+  const cardLikeButton = cardClone.querySelector('.button_variety_like-button');
+  
+  cardCloneImage.src = imageSource;
+  cardCloneImage.alt = title;
+  cardCloneTitle.textContent = title;
+
+
+  cardDeleteButton.addEventListener('click', deleteCard);
+  cardLikeButton.addEventListener('click', toggleCardLike);
+
+  function enlargeImage() {
+    openPopUp(enlargedImagePopUp);
+    enlargedImage.src = cardCloneImage.src;
+    enlargedImage.alt = cardCloneTitle.textContent;
+    enlargedImageTitle.textContent = cardCloneTitle.textContent;
+  };
+
+  cardCloneImage.addEventListener('click', enlargeImage);
+
+  return cardClone;
+};
+
+initialCards.forEach(element => {
+  addNewCard(placesSection, createCard(element.name, element.link))
+>>>>>>> 13989c42a24dfc946a6a1cf89e4b90dd8f33e407
 });
