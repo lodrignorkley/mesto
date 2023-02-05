@@ -40,7 +40,7 @@ export default class FormValidator {
     };
 
     disableSubmitButton() {
-      this._subButton.classList.add('popup__submit-button_variety_deactivated');
+      this._subButton.classList.add(`${this._deactivatedSubmissionButton}`);
       this._subButton.setAttribute('disabled', 'true');
     };
 

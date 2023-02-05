@@ -77,7 +77,7 @@ function closeUsingEscape(event) {
 
 function closePopUpFromOutside(event) {
   if(event.target.classList.contains('popup') && event.target.classList.contains('popup_opened')) {
-    event.target.classList.remove('popup_opened');
+    closePopUp(event.target);
   }
 };
 
@@ -131,9 +131,15 @@ editProfilePopUpForm.addEventListener('submit', function() {
 });
 
 
-initialCards.forEach(element => {
-  addNewCard(placesSection, element, '#places__card-template');
-});
+function createCard(element, templateSelector) {
+  const card = new Card(element.name, element.link, templateSelector);
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
+function addCard(cardContainer, newCard) {
+  cardContainer.prepend(newCard);
+}
 
 function formNewCardFromPopUp(name, link) {
   const newCard = {
@@ -143,14 +149,14 @@ function formNewCardFromPopUp(name, link) {
   return newCard;
 }
 
-function addNewCard(cardContainer, element, templateSelector) {
-  const card = new Card(element.name, element.link, templateSelector);
-  cardContainer.prepend(card.generateCard());
-};
+initialCards.forEach(element => {
+  addCard(placesSection, createCard(element, '#places__card-template'));
+});
 
 addNewPlacePopUpForm.addEventListener('submit', function() {
+  const newCardFromPopUp = formNewCardFromPopUp(inputDestination.value, inputImageSource.value);
   preventEvtDefaultBehavior(event);
-  addNewCard(placesSection, formNewCardFromPopUp(inputDestination.value, inputImageSource.value), '#places__card-template');
+  addCard(placesSection, createCard(newCardFromPopUp, '#places__card-template'));
   resetForm(addNewPlacePopUpForm);
   closePopUp(addNewPlacePopUp);
 });
