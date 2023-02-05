@@ -1,7 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 const page = document.querySelector('.page');
-const popUp = page.querySelector('.popup');
 const profileName = page.querySelector('.profile__name');
 const profileOccupation = page.querySelector('.profile__occupation');
 const editButton = page.querySelector('.button_variety_edit-button');
@@ -135,8 +134,6 @@ editProfilePopUpForm.addEventListener('submit', function() {
 initialCards.forEach(element => {
   addNewCard(placesSection, element, '#places__card-template');
 });
-
-
 
 function formNewCardFromPopUp(name, link) {
   const newCard = {

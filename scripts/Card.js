@@ -13,20 +13,14 @@ export default class Card {
     _getTemplate() {
         const cardCloneTemplate = document.querySelector(`${this._templateSelector}`).content.querySelector('.places__card').cloneNode(true);
         return cardCloneTemplate;
-  }
-
-    _updateCardClone() {
-      this._cardCloneImage.src = this._imageSource;
-      this._cardCloneImage.alt = this._title;
-      this._cardCloneTitle.textContent = this._title;
-  }
+    }
 
     _toggleCardLike() {
-        this._cardCloneLikeButton.classList.toggle('button_variety_like-button-active');
-  }
+      this._cardCloneLikeButton.classList.toggle('button_variety_like-button-active');
+    }
 
     _deleteCard() {
-        this._cardClone.remove();
+      this._cardClone.remove();
     }
 
     _enlargeImage() {
@@ -34,6 +28,12 @@ export default class Card {
       enlargedImage.src = this._cardCloneImage.src;
       enlargedImage.alt = this._cardCloneTitle.textContent;
       enlargedImageTitle.textContent = this._cardCloneTitle.textContent;
+    }
+
+    _updateCardClone() {
+      this._cardCloneImage.src = this._imageSource;
+      this._cardCloneImage.alt = this._title;
+      this._cardCloneTitle.textContent = this._title;
     }
 
     _setEventListeners() {
