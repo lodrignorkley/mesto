@@ -54,9 +54,9 @@ const formReference = {
 };
 
 
-const profileFormValidator = new FormValidator(formReference, '.form_variety_profile');
+const profileFormValidator = new FormValidator(formReference, '.popup__form_variety_profile');
 profileFormValidator.enableValidation();
-const newPlaceFormValidator = new FormValidator(formReference, '.form_variety_place');
+const newPlaceFormValidator = new FormValidator(formReference, '.popup__form_variety_place');
 newPlaceFormValidator.enableValidation();
 
 
